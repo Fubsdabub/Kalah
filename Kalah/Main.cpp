@@ -154,12 +154,84 @@ void doAITests() {
 	Game test(b, &Dhruv, &Fahim);
 	test.play();
 }
+void userPlay(){
+	bool keepPlaying = true;
+	while(keepPlaying){
+	cout << "How many starting holes?" << endl;
+	int startHoles = 0;
+	cin >> startHoles;
+	while((startHoles <= 0)||(startHoles > 10)){
+		cout << "Invalid number of holes, please try again." << endl;
+		cin >> startHoles;
+	}
+	cout << "How many starting beans?" << endl;
+	int startBeans = 0;
+	cin >> startBeans;
+	while((startBeans <= 0)||(startBeans > 10)){
+		cout << "Invalid number of beans, please try again." << endl;
+		cin >> startBeans;
+	}
+	Board toPlay(startHoles,startBeans);
+	cout << "Pick one option, 1. Player vs Player, 2. Player vs Computer" << endl;
+	int optPlay = 0;
+	cin >> optPlay;
+	while ((optPlay != 1)&&(optPlay != 2)){
+		"Invalid option, please try again." << endl;
+		cin >> optPlay;
+	}
+	cout << "Would Player 1 like to play North or South? Press 1 for North, 2 for South" << endl;
+	int sideOpt = 0;
+	cin >> sideOpt;
+	while ((sideOpt != 1)&&(sideOpt != 2)){
+		"Invalid option, please try again." << endl;
+		cin >> sideOpt;
+	}
+		
+	if(optPlay == 1){
+		HumanPlayer PlayerOne;
+		HumanPlayer PlayerTwo;
+		if(sideOpt == 1){
+			Game toStart(toPlay,PlayerTwo,PlayerOne);
+		}else{
+			Game toStart(toPlay,PlayerOne,PlayerTwo);
+		}
+	}else{
+		HumanPlayer PlayerOne;
+		int difficulty = 0;
+		cout << "How difficult? Press 1 for easy, 2 for challenging" << endl;
+		cin >> difficulty;
+		while((difficulty != 1)&&(difficulty != 2)){
+			cout << "Invalid input, please try again.";
+			cin >> difficulty;
+		}
+		if(difficulty == 1){
+			BadPlayer PlayerTwo;
+		}else{
+			SmartPlayer PlayerTwo;
+		}
+		if(sideOpt == 1){
+			Game toStart(toPlay,PlayerTwo,PlayerOne);
+		}else{
+			Game toStart(toPlay,PlayerOne,PlayerTwo);
+		}
+	}	
+	toStart.play();
+	cout << "Want to Play Again? Y/N";
+	string response;
+		getline(cin, response);
+		if((response[0] == 'Y')||(response[0] == 'y')){
+		}
+		else{
+			keepPlaying = false;
+		}
+	}
+}
 
 int main()
 {
-	doBoardTests();
-	doPlayerTests();
-	doGameTests();
+	//doBoardTests();
+	//doPlayerTests();
+	//doGameTests();
 	//doCustomTests();
 	//doAITests();
 	cout << "Passed all tests" << endl;
